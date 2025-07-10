@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>267210194267-3cllaljo2i2hkjumq4vfjq9o7fskplc5.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.267210194267-3cllaljo2i2hkjumq4vfjq9o7fskplc5</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>267210194267-0qn2vk9acd7nu8t1b7bc6kk543b9q613.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD9hbrw61do67KHFoQSwsptffska1QKTfI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>267210194267</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.diego.SparkUp</string>
+	<key>PROJECT_ID</key>
+	<string>sparkup-91b81</string>
+	<key>STORAGE_BUCKET</key>
+	<string>sparkup-91b81.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:267210194267:ios:11bc3f92763b85e3456e7e</string>
+</dict>
+</plist>
