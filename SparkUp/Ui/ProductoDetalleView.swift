@@ -13,6 +13,7 @@ struct ProductoDetalleView: View {
     @State private var errorMessage: String?
     @State private var mostrarSnackbar = false
     @State private var volverAMain = false
+    @State private var productoAConfirmar: Producto? = nil
 
     var body: some View {
         NavigationStack {
@@ -22,15 +23,23 @@ struct ProductoDetalleView: View {
                 } else if let producto = producto {
                     ScrollView {
                         VStack(spacing: 16) {
-                            AsyncImage(url: URL(string: producto.imagenURL)) { image in
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                            } placeholder: {
-                                Color.gray.frame(height: 320)
+                            GeometryReader { geo in
+                                AsyncImage(url: URL(string: producto.imagenURL)) { image in
+                                    image
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: geo.size.width - 32, height: geo.size.width - 32)
+                                        .clipped()
+                                        .cornerRadius(16)
+                                } placeholder: {
+                                    Color.gray
+                                        .frame(width: geo.size.width - 32, height: geo.size.width - 32)
+                                        .cornerRadius(16)
+                                }
+                                .padding(.horizontal, 16)
                             }
-                            .frame(height: 320)
-                            .cornerRadius(16)
+                            .frame(height: 300) // Ajustamos altura para que funcione GeometryReader
+
 
                             Text(producto.titulo)
                                 .font(.title)
@@ -50,6 +59,7 @@ struct ProductoDetalleView: View {
                             if esMio(producto) {
                                 Text("Este es tu producto.")
                                     .foregroundColor(.red)
+
                                 Button("Eliminar producto") {
                                     showDeleteDialog = true
                                 }
@@ -57,27 +67,24 @@ struct ProductoDetalleView: View {
                                 .tint(.red)
                             } else {
                                 Button("Comprar") {
-                                    // Aquí podrías navegar a una pantalla de confirmar pedido
-                                    errorMessage = "Función 'Comprar' no implementada aún."
-                                    mostrarSnackbar = true
+                                    productoAConfirmar = producto
                                 }
                                 .buttonStyle(.borderedProminent)
                             }
                         }
                         .padding()
                     }
+
                 } else {
                     Text("Producto no encontrado")
                         .foregroundColor(.secondary)
                 }
             }
             .navigationTitle("Detalle del producto")
+           
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Volver") { dismiss() }
-                }
-            }
+            #endif
             .onAppear { cargarProducto() }
             .alert("Aviso", isPresented: $mostrarSnackbar) {
                 Button("OK", role: .cancel) {}
@@ -93,10 +100,13 @@ struct ProductoDetalleView: View {
                 }
                 Button("Cancelar", role: .cancel) {}
             }
-
-            // Redirigir a la pantalla principal después de eliminar
-            NavigationLink(destination: MainScreen(), isActive: $volverAMain) {
-                EmptyView()
+            // ✅ Redirección a ConfirmacionPedidoView usando navigationDestination
+            .navigationDestination(item: $productoAConfirmar) { producto in
+                ConfirmacionPedidoView(producto: producto)
+            }
+            // ✅ Redirección a MainView al eliminar
+            .navigationDestination(isPresented: $volverAMain) {
+                MainView()
             }
         }
     }

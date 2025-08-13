@@ -5,22 +5,25 @@ struct ProductCard: View {
     let onClick: () -> Void
 
     var body: some View {
-        VStack(alignment: .leading) {
-            AsyncImage(url: URL(string: producto.imagenURL)) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-            } placeholder: {
-                Color.gray.opacity(0.3)
+        VStack(alignment: .leading, spacing: 0) {
+            GeometryReader { geo in
+                AsyncImage(url: URL(string: producto.imagenURL)) { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: geo.size.width, height: geo.size.width)
+                        .clipped()
+                } placeholder: {
+                    Color.gray.opacity(0.2)
+                        .frame(width: geo.size.width, height: geo.size.width)
+                }
             }
-            .frame(height: 140)
-            .clipped()
-            .cornerRadius(16, corners: [.topLeft, .topRight])
+            .aspectRatio(1, contentMode: .fit)
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(producto.titulo)
                     .font(.headline)
-                    .lineLimit(1)
+                    .lineLimit(2)
 
                 Text(producto.descripcion)
                     .font(.subheadline)
@@ -34,10 +37,18 @@ struct ProductCard: View {
                     .font(.caption)
                     .foregroundColor(.gray)
             }
-            .padding([.horizontal, .bottom])
+            .padding(8)
         }
-        .background(Color(.systemGray6))
-        .cornerRadius(16)
+        .background(
+            Group {
+                #if os(iOS)
+                Color(.systemGray6)
+                #elseif os(macOS)
+                Color(NSColor.controlBackgroundColor)
+                #endif
+            }
+        )
+        .cornerRadius(12)
         .onTapGesture {
             onClick()
         }

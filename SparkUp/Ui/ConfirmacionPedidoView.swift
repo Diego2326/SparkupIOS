@@ -1,3 +1,11 @@
+//
+//  ConfirmacionPedidoView.swift
+//  SparkUp
+//
+//  Created by Diego on 10/7/25.
+//
+
+
 import SwiftUI
 import FirebaseFirestore
 import FirebaseAuth
@@ -63,7 +71,10 @@ struct ConfirmacionPedidoView: View {
         }
         .padding()
         .navigationTitle("Confirmación")
+        #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+        #endif
+
     }
 
     func enviarPedido() {
@@ -79,8 +90,10 @@ struct ConfirmacionPedidoView: View {
             "nombreArticulo": producto.titulo,
             "correoComprador": comprador,
             "correoVendedor": producto.vendedor,
-            "precio": producto.precio
+            "precio": producto.precio,
+            "confirmado": false
         ]
+
 
         db.collection("pedidos").addDocument(data: pedido) { error in
             enviando = false
