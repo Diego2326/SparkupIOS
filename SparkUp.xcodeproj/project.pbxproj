@@ -52,20 +52,12 @@
 			);
 			target = F1E56A6D2E1D586500BC2B7F /* SparkUpUITests */;
 		};
-		F1C3FBBF2E20384200F23334 /* Exceptions for "SparkUp" folder in "SparkUp" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = F1E56A562E1D585E00BC2B7F /* SparkUp */;
-		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		F1E56A592E1D585E00BC2B7F /* SparkUp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				F1C3FBBF2E20384200F23334 /* Exceptions for "SparkUp" folder in "SparkUp" target */,
 				F1C3FBA42E200E1D00F23334 /* Exceptions for "SparkUp" folder in "SparkUpTests" target */,
 				F1C3FBA52E200E1D00F23334 /* Exceptions for "SparkUp" folder in "SparkUpUITests" target */,
 			);
